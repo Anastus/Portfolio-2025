@@ -16,7 +16,6 @@ import { motion } from "framer-motion";
 
 export default function Contact() {
   const [toast, setToast] = useState(null);
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
 
   const showToast = (text) => {
     setToast(text);
@@ -26,19 +25,13 @@ export default function Contact() {
   const copyEmail = async () => {
     try {
       await navigator.clipboard.writeText("johnanastus25@gmail.com");
-      showToast("Email copied ✅");
+      showToast("Email copied ");
     } catch (e) {
       showToast("Copy failed — use the email link");
     }
   };
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    // open mail client with subject and body
-    const subject = encodeURIComponent(`Hello from ${form.name || "Portfolio Visitor"}`);
-    const body = encodeURIComponent(`${form.message}\n\n— ${form.name}\n${form.email || ""}`);
-    window.location.href = `mailto:johnanastus25@gmail.com?subject=${subject}&body=${body}`;
-  };
+  
 
   return (
     <section id="contact" className="section container section-separated">

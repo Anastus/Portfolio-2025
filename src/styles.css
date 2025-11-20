@@ -3,9 +3,12 @@
    Replace your current styles.css with this file.
 */
 
+
 /* -------------------------
    Variables & base
    ------------------------- */
+
+   
    :root{
     --max-width:1100px;
     --muted:#6b7280;
@@ -635,4 +638,55 @@
   .contact-grid { grid-template-columns: 1fr; }
   .contact-form-wrap { order: 2; }
   .contact-cards { order: 1; }
+}
+
+/* =========================
+  Header: black -> transparent on scroll
+  ========================= */
+
+/* BASE HEADER */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: background 250ms ease, color 250ms ease, backdrop-filter 250ms ease;
+  backdrop-filter: blur(6px);
+}
+
+/* ===========================
+   HEADER AT TOP (BLACK)
+   =========================== */
+.header-solid {
+  background: rgba(0, 0, 0, 1) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.header-solid .logo,
+.header-solid .nav a {
+  color: #ffffff !important;   /* solid white text */
+}
+
+/* ===========================
+   HEADER WHILE SCROLLING
+   Transparent background,
+   Solid BLACK text
+   =========================== */
+.header-transparent {
+  background: rgba(0,0,0,0.05) !important;  /* subtle tinted transparent */
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.header-transparent .logo,
+.header-transparent .nav a {
+  color: #000000 !important;    /* solid BLACK text */
+}
+
+/* Hover color (when transparent) */
+.header-transparent .nav a:hover {
+  color: #333 !important;
+}
+
+/* Hover color (when solid black) */
+.header-solid .nav a:hover {
+  color: #e5e5e5 !important;
 }

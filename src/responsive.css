@@ -1,0 +1,92 @@
+/* src/responsive.css
+   Non-invasive responsive layer.
+   Import this AFTER your main styles.css so these rules override where needed.
+   Only layout & spacing changes; no color/font/style rewrites.
+*/
+
+/* small helper: fluid container padding */
+.container {
+    padding-left: clamp(12px, 2.4vw, 32px);
+    padding-right: clamp(12px, 2.4vw, 32px);
+  }
+  
+  /* make sure root font-size scales slightly on very small screens */
+  @media (max-width: 360px) {
+    html { font-size: 14px; }
+  }
+  
+  /* === HERO: stack & reduce spacing on small screens === */
+  @media (max-width: 880px) {
+    .hero-inner {
+      grid-template-columns: 1fr !important; /* stack hero content */
+      gap: 18px !important;
+    }
+    .hero-outer { padding-top: 28px !important; padding-bottom: 28px !important; }
+    .hero-title { font-size: clamp(1.4rem, 6vw, 2rem) !important; }
+    .hero-desc { max-width: 100% !important; }
+  }
+  
+  /* === PROJECTS: responsive grid columns === */
+  @media (max-width: 1199px) {
+    .projects-grid {
+      grid-template-columns: repeat(2, minmax(0,1fr)) !important;
+      gap: 14px !important;
+    }
+  }
+  @media (max-width: 760px) {
+    .projects-grid {
+      grid-template-columns: 1fr !important;
+      gap: 12px !important;
+    }
+  }
+  
+  /* === CONTACT: responsive columns -> rows === */
+  @media (max-width: 1100px) {
+    .contact-grid { grid-template-columns: 1fr 360px; gap: 18px; }
+    .contact-cards { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  }
+  @media (max-width: 760px) {
+    .contact-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
+    .contact-cards { grid-template-columns: 1fr !important; gap: 12px !important; }
+    .contact-card { padding: 12px !important; }
+  }
+  
+  /* === SKILLS: single-line with graceful wrap / scroll === */
+  @media (max-width: 760px) {
+    .skills-grid {
+      display: flex !important;
+      gap: 10px !important;
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+      padding-bottom: 8px !important;
+    }
+    .skills-grid::-webkit-scrollbar { display: none; }
+  }
+  
+  /* === NAV: collapse spacing and font-size on small screens === */
+  @media (max-width: 560px) {
+    .nav { gap: 10px; }
+    .nav a { font-size: 0.88rem; }
+    .logo { font-size: 1rem; }
+    .header-inner { padding: 8px 0; }
+  }
+  
+  /* === PROJECT CARD / SKILL CHIP sizing tweaks for small screens === */
+  @media (max-width: 520px) {
+    .project-card { padding: 12px !important; border-radius: 10px !important; }
+    .skill-item { padding: 6px 10px !important; height: 32px !important; font-size: 0.78rem !important; }
+  }
+  
+  /* === Footer / global spacing adjustments for smaller viewports === */
+  @media (max-width: 520px) {
+    .section { padding-top: 20px !important; padding-bottom: 20px !important; }
+    .container { padding-left: 12px !important; padding-right: 12px !important; }
+  }
+  
+  /* === Accessibility: prefer reduced motion === */
+  @media (prefers-reduced-motion: reduce) {
+    * { transition-duration: 0ms !important; animation-duration: 0ms !important; }
+  }
+  
+  /* === Safety: avoid overriding visual styles — only layout & spacing === */
+  /* If you need to tweak a specific component further copy the selector here and add a mobile override. */
