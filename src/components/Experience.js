@@ -16,7 +16,7 @@ export default function Experience(){
 <li>Streamlined collaboration with Git, GitHub, GitLab, managing branches, resolving merge conflicts, and handling pull/merge requests efficiently.</li>
 <li>Effectively managed global state using Redux, implementing scalable patterns for complex workflows and asynchronous operations.</li>
 <li>Worked closely with backend teams integrating APIs using Axios, validating endpoints with Postman, and debugging with Chrome DevTools to improve reliability.</li>
-<li>COptimized front-end performance with lazy loading, minimizing load times and improving page responsiveness.</li>
+<li>Coptimized front-end performance with lazy loading, minimizing load times and improving page responsiveness.</li>
 <li>Collaborated directly with clients and stakeholders, gathering requirements, addressing feedback, and ensuring UI deliverables aligned with business goals.</li>            
           </ul>
         </div>
