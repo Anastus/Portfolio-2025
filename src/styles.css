@@ -10,7 +10,7 @@
 
    
    :root{
-    --max-width:1100px;
+    --max-width:1400px;
     --muted:#6b7280;
     --accent:#0f1724;
     --gap:20px;
@@ -31,12 +31,14 @@
   
   /* central container */
   .container{
-    max-width:var(--max-width);
-    margin:0 auto;
-    padding-left:24px;
-    padding-right:24px;
-    padding-top:12px;
-    padding-bottom:12px;
+    width: calc(100% - 40px);       /* use nearly full width with small page padding */
+    max-width: var(--max-width);     /* controlled maximum for very large screens */
+    margin: 0 auto;
+    padding-left: 20px;             /* comfortable inner padding */
+    padding-right: 20px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    box-sizing: border-box;
   }
   
   /* -------------------------
@@ -302,11 +304,15 @@
    ------------------------------------------------------ */
 
 /* Main container spacing */
-.container {
-  max-width: var(--max-width);
+.container{
+  width: calc(100% - 40px);       /* use nearly full width with small page padding */
+  max-width: var(--max-width);     /* controlled maximum for very large screens */
   margin: 0 auto;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding-left: 20px;             /* comfortable inner padding */
+  padding-right: 20px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  box-sizing: border-box;
 }
 
 /* STAR OF THE FIX: balanced spacing for all sections */
@@ -690,3 +696,367 @@
 .header-solid .nav a:hover {
   color: #e5e5e5 !important;
 }
+
+/* ==========================================================================
+   FINAL header: always BLACK at top + translucent black on scroll (applies to both themes)
+   This block forces header to be solid black at top and translucent black while scrolling,
+   keeps logo/nav/controls white, and ensures toggle visibility.
+   ========================================================================== */
+:root { --bg: #ffffff; --surface: #ffffff; --text: #0f1724; --card-border: #f3f4f6; }
+.header { position: sticky !important; top: 0 !important; overflow: visible !important; z-index: 9999 !important; transition: background .22s ease, color .22s ease, border-color .22s ease, box-shadow .22s ease; -webkit-backdrop-filter: blur(0.1px); backdrop-filter: blur(0.1px); }
+
+/* Solid black at page top (no transparency) */
+.header.header-solid,
+.header.liquid-glass.glass-top,
+html[data-theme="light"] .header.header-solid,
+html[data-theme="dark"] .header.header-solid {
+  background: #000000 !important;    /* solid black at top */
+  color: #ffffff !important;
+  border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4) !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Translucent black while scrolling (glass effect) */
+.header.header-transparent,
+.header.liquid-glass.glass-scrolled,
+html[data-theme="light"] .header.header-transparent,
+html[data-theme="dark"] .header.header-transparent {
+  background: rgba(0,0,0,0.56) !important;   /* translucent black while scrolling */
+  -webkit-backdrop-filter: blur(8px) saturate(120%) !important;
+  backdrop-filter: blur(8px) saturate(120%) !important;
+  color: #ffffff !important;
+  border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+}
+
+/* ensure header children always white and visible */
+.header .logo,
+.header .nav a,
+.header .header-controls {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* ensure toggle is visible above header */
+.header-controls { z-index: 10010 !important; }
+.theme-toggle { z-index: 10020 !important; }
+
+/* Toggle track/thumb explicit contrast */
+.theme-toggle .toggle-track {
+  width: 100% !important;
+  height: 16px !important;
+  padding: 2px !important;
+  border-radius: 999px !important;
+  box-sizing: border-box !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+.theme-toggle .toggle-thumb {
+  width: 14px !important;
+  height: 14px !important;
+  border-radius: 50% !important;
+  transition: transform .18s ease !important;
+  box-shadow: 0 6px 12px rgba(2,6,23,0.14) !important;
+  transform: translateX(0) !important;
+  display: inline-block !important;
+}
+.theme-toggle.light .toggle-track { background: linear-gradient(180deg,#fff,#f3f4f6) !important; border: 1px solid rgba(255,255,255,0.06) !important; }
+.theme-toggle.light .toggle-thumb { transform: translateX(0) !important; background: linear-gradient(180deg,#fff,#eef3ff) !important; box-shadow: 0 6px 16px rgba(2,6,23,0.06) !important; }
+.theme-toggle.dark .toggle-track { background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)) !important; border: 1px solid rgba(255,255,255,0.06) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,0.02) !important; }
+.theme-toggle.dark .toggle-thumb { transform: translateX(22px) !important; background: linear-gradient(180deg,#f6fbff,#e1efff) !important; border: 1px solid rgba(15,23,36,0.12) !important; box-shadow: 0 6px 18px rgba(2,6,23,0.42) !important; }
+.theme-toggle:focus-visible { outline: 3px solid rgba(59,130,246,0.18) !important; outline-offset: 4px !important; }
+
+/* ensure page surfaces follow theme vars */
+html, body { background: var(--bg) !important; color: var(--text) !important; }
+.hero-outer, .section, .card-meta, .project-card, .contact-card, .contact-form, .skill-item, .footer { background: var(--surface) !important; color: var(--text) !important; border-color: var(--card-border) !important; }
+
+@media (max-width:720px) {
+  .nav { position: static !important; transform: none !important; }
+}
+
+/* END final header block */
+
+/* --------------------------------------------------------
+   Header layout override: place logo at left, nav near the right
+   toggle, and toggle pinned to the far right. This preserves
+   the portfolio title styling and the existing header color/blur
+   behavior.
+   -------------------------------------------------------- */
+
+.header-inner {
+  /* keep relative so absolute children (nav / controls) position from it */
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0; /* keep earlier padding from .header-inner itself */
+}
+
+/* logo stays in normal flow on the left */
+.header .logo {
+  position: relative;
+  z-index: 12;
+  margin-right: 8px;
+}
+
+/* nav moved to the right, sitting just left of the toggle
+   right offset controls horizontal gap between nav and toggle */
+.header .nav {
+  /* keep nav in normal flow (not absolutely positioned) so only the toggle is pinned to the corner */
+  position: static;            /* do not absolute-position the nav */
+  margin-left: auto;           /* push nav to the right side of the header */
+  margin-right: calc(var(--toggle-track-w, 56px) + 80px);
+  display: flex;
+  gap: 28px;                   /* equal spacing between HOME / PROJECTS / CONTACT */
+  align-items: center;
+  z-index: 11;
+  pointer-events: auto;
+  white-space: nowrap;         /* prevent nav labels from wrapping */
+}
+
+/* header-controls holds the toggle; pin it to the far right */
+.header .header-controls {
+  position: absolute;
+  right: 18px;             /* small inset from the right edge */
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 13;
+}
+
+/* Responsive fallback: small screens return to normal flow */
+@media (max-width: 880px) {
+  .header .nav { position: static !important; transform: none !important; margin-left: 12px; gap: 16px; }
+  .header .header-controls { position: static !important; transform: none !important; margin-left: auto; }
+}
+
+/* Small tweak: if nav overlaps logo on very narrow large screens, reduce the right offset */
+@media (max-width: 1100px) and (min-width: 881px) {
+  .header .nav { right: 72px; gap: 22px; }
+}
+
+/* END header layout override */
+
+/* --------------------------------------------------------
+   Header: restore original size + small toggle + light-mode detail
+   Inserted as an override so it doesn't disturb other header logic
+   -------------------------------------------------------- */
+
+/* restore comfortable header height (original look) */
+.header-inner {
+  padding: 16px 0 !important;    /* restore earlier comfortable padding */
+  min-height: 64px;              /* ensure header isn't compressed */
+  align-items: center;           /* defensive: keep vertical centering */
+}
+
+/* tweak logo sizing back to prominence (if needed) */
+.header .logo {
+  font-size: 1.5rem !important;
+  font-weight: 800 !important;
+}
+
+/* make the theme toggle smaller and sharper */
+.theme-toggle {
+  width: 38px !important;        /* smaller toggle width */
+  height: 22px !important;       /* smaller toggle height */
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.theme-toggle .toggle-track {
+  width: 100% !important;
+  height: 16px !important;       /* slimmer track */
+  padding: 2px !important;       /* minimal padding so thumb sits flush */
+  border-radius: 999px !important;
+  box-sizing: border-box !important;
+}
+.theme-toggle .toggle-thumb {
+  width: 14px !important;        /* smaller thumb */
+  height: 14px !important;
+  border-radius: 50% !important; /* circular thumb */
+  transition: transform .18s ease !important;
+  box-shadow: 0 6px 12px rgba(2,6,23,0.14) !important; /* subtle elevation */
+}
+/* adjust thumb position for the new smaller width */
+.theme-toggle.dark .toggle-thumb { transform: translateX(16px) !important; }
+.theme-toggle.light .toggle-thumb { transform: translateX(0) !important; }
+
+/* light mode: add subtle rim and soft glow so toggle stands out on black header */
+html[data-theme="light"] .theme-toggle.light .toggle-track {
+  background: linear-gradient(180deg, #ffffff, #f3f4f6) !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08) !important; /* gentle shadow for depth */
+}
+html[data-theme="light"] .theme-toggle.light .toggle-thumb {
+  background: linear-gradient(180deg,#fff,#eef3ff) !important;
+  border: 1px solid rgba(0,0,0,0.06) !important; /* subtle rim so the thumb reads on white */
+}
+
+/* ensure header-controls doesn't change position when we increase header height */
+.header .header-controls { top: 50%; transform: translateY(-50%); }
+
+/* small responsive tweak to keep toggle visible on narrow screens */
+@media (max-width: 880px) {
+  .header-inner { padding: 12px 0 !important; min-height: 56px; }
+  .theme-toggle { width: 44px !important; height: 26px !important; }
+  .theme-toggle .toggle-thumb { width: 18px !important; height: 18px !important; }
+}
+
+/* END override: restore header height + small toggle + light-mode detail */
+/* Light mode: iPhone blue track + rectangular blue thumb */
+html[data-theme="light"] .theme-toggle.light .toggle-track {
+  background: linear-gradient(180deg, #f0f6ff, #ffffff) !important; /* very pale blue to white */
+  border: 1px solid rgb(0, 5, 10) !important; /* faint blue rim */
+  box-shadow: 0 6px 18px rgba(0,122,255,0.06) !important; /* subtle blue glow */
+  padding: 2px !important; /* ensure thumb sits flush */
+}
+html[data-theme="light"] .theme-toggle.light .toggle-thumb {
+  background: linear-gradient(180deg,#e2e8ee,#f7f9fb) !important; /* iPhone blue gradient */
+  border: 1px solid rgba(0,0,0,0.08) !important; /* slim rim for contrast */
+  box-shadow: 0 6px 16px rgba(0,102,204,0.18) !important;
+  transform: translateX(0) !important; /* left-most */
+}
+
+/* Dark mode: iPhone green track + rectangular green thumb */
+html[data-theme="dark"] .theme-toggle.dark .toggle-track,
+.theme-toggle.dark .toggle-track {
+  background: linear-gradient(180deg, rgba(52,199,89,0.08), rgba(75, 246, 89, 0.735)) !important;
+  border: 1px solid rgb(1, 13, 4) !important; /* faint green rim */
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.02) !important;
+  padding: 2px !important;
+}
+html[data-theme="dark"] .theme-toggle.dark .toggle-thumb,
+.theme-toggle.dark .toggle-thumb {
+  background: linear-gradient(180deg,#34c759,#28a745) !important; /* iPhone green gradient */
+  border: 1px solid rgba(4,120,87,0.12) !important;
+  box-shadow: 0 6px 18px rgba(4,120,87,0.28) !important;
+  transform: translateX(18px) !important; /* moved right for 'on' state */
+}
+
+/* Ensure toggle visibility */
+.theme-toggle { z-index: 10020 !important; }
+.theme-toggle .toggle-thumb { transition: transform .18s ease !important; }
+.theme-toggle:focus-visible { outline: 3px solid rgba(59,130,246,0.18) !important; outline-offset: 4px !important; }
+/* ==================================================================
+   iOS-style Toggle (iOS 26 inspired)
+   - pill-shaped track with subtle inner shadow
+   - circular thumb with subtle gloss + active glow
+   - smooth movement and high contrast in both themes
+   - appended as an override (uses !important) so it wins over earlier rules
+   ================================================================== */
+
+:root {
+  --ios-blue: #eff2f5;     /* iOS style blue */
+  --ios-green: #74ee7b;    /* iOS style green */
+  --toggle-track-h: 22px;  /* track height (smaller) */
+  --toggle-track-w: 38px;  /* track width (smaller) */
+  --toggle-padding: 2px;   /* space inside track for thumb */
+  --toggle-thumb-size: calc(var(--toggle-track-h) - (var(--toggle-padding) * 2)); /* thumb is square */
+}
+
+.theme-toggle { width: var(--toggle-track-w) !important; height: var(--toggle-track-h) !important; display:inline-flex !important; align-items:center !important; justify-content:center !important; }
+.theme-toggle .toggle-track {
+  width: 100% !important;
+  height: var(--toggle-track-h) !important;
+  padding: var(--toggle-padding) !important;
+  border-radius: 999px !important;
+  box-sizing: border-box !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  position: relative !important;
+  transition: background .22s ease, box-shadow .22s ease !important;
+  background: linear-gradient(180deg,#f6f7fb,#ffffff) !important; /* default pale */
+  border: 1px solid rgb(2, 6, 23) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 6px 18px rgba(2,6,23,0.06) !important;
+}
+
+.theme-toggle .toggle-thumb {
+  width: var(--toggle-thumb-size) !important;
+  height: var(--toggle-thumb-size) !important;
+  border-radius: 50% !important; /* circular thumb for iOS feel */
+  background: linear-gradient(180deg,#ffffff,#f1f7ff) !important;
+  box-shadow: 0 10px 28px rgba(2,6,23,0.14), inset 0 1px 0 rgba(255,255,255,0.5) !important; /* stronger shadow + inner highlight */
+  border: 1px solid rgba(2,6,23,0.08) !important; /* subtle rim for contrast */
+  transform: translateX(0) !important;
+  transition: transform .26s cubic-bezier(.2,.9,.2,1) !important; box-shadow : .16s ease !important;
+  will-change: transform, box-shadow;
+  position: relative !important;
+}
+
+/* Light mode ON (blue) */
+html[data-theme="light"] .theme-toggle.dark .toggle-track,
+html[data-theme="light"] .theme-toggle.dark .toggle-track:where(*) {
+  background: linear-gradient(180deg, rgba(10,132,255,0.14), rgba(10,132,255,0.06)) !important;
+  border: 1px solid rgba(10,132,255,0.2) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 10px 30px rgba(10,132,255,0.06) !important;
+}
+html[data-theme="light"] .theme-toggle.dark .toggle-thumb {
+  background: linear-gradient(180deg,var(--ios-blue), #0066d6) !important;
+  border: 1px solid rgba(6,36,85,0.12) !important;
+  box-shadow: 0 10px 30px rgba(10,132,255,0.22) !important;
+  transform: translateX(calc(var(--toggle-track-w) - var(--toggle-thumb-size) - (var(--toggle-padding) * 2))) !important;
+}
+
+/* Light mode OFF (thumb left) - ensure crisp white thumb */
+html[data-theme="light"] .theme-toggle.light .toggle-track {
+  background: linear-gradient(180deg,#f6f7fb,#ffffff) !important;
+  border: 1px solid rgba(2,6,23,0.06) !important;
+}
+html[data-theme="light"] .theme-toggle.light .toggle-thumb {
+  /* light-mode: white thumb with stronger border, depth and inner highlight */
+  width: calc(var(--toggle-thumb-size) + 4px) !important; /* slightly larger for visibility */
+  height: calc(var(--toggle-thumb-size) + 4px) !important;
+  border-radius: 50% !important; /* circular thumb */
+  background: linear-gradient(180deg,#ffffff,#f6f7fb) !important; /* clean white */
+  border: 1px solid rgba(2,6,23,0.12) !important; /* slightly stronger rim for contrast */
+  box-shadow:
+    0 18px 40px rgba(2, 6, 23, 0.469),   /* deep ambient shadow for depth */
+    0 6px 14px rgba(2,6,23,0.10),    /* soft secondary shadow */
+    inset 0 2px 8px rgba(255,255,255,0.9); /* bright inner highlight */
+  transition: transform .22s cubic-bezier(.2,.9,.2,1), box-shadow .16s ease !important;
+  will-change: transform, box-shadow;
+  transform: translateX(0) !important; /* left-most for OFF state */
+}
+
+/* Dark mode ON (green) */
+html[data-theme="dark"] .theme-toggle.dark .toggle-track,
+.theme-toggle.dark .toggle-track {
+  background: linear-gradient(180deg, rgba(52,199,89,0.12), rgba(52,199,89,0.04)) !important;
+  border: 1px solid rgba(52,199,89,0.18) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.02), 0 10px 30px rgba(34,197,94,0.06) !important;
+}
+html[data-theme="dark"] .theme-toggle.dark .toggle-thumb,
+.theme-toggle.dark .toggle-thumb {
+  background: linear-gradient(180deg,var(--ios-green), #28a745) !important;
+  border: 1px solid rgba(4,120,87,0.12) !important;
+  box-shadow: 0 12px 32px rgba(34,197,94,0.22), inset 0 1px 0 rgba(255,255,255,0.04) !important;
+  transform: translateX(calc(var(--toggle-track-w) - var(--toggle-thumb-size) - (var(--toggle-padding) * 2))) !important;
+  width: var(--toggle-thumb-size) !important;
+  height: var(--toggle-thumb-size) !important;
+  border-radius: 50% !important;
+}
+
+/* Dark mode OFF thumb (left) */
+html[data-theme="dark"] .theme-toggle.light .toggle-track {
+  background: linear-gradient(180deg,#0b1220,#0f1724) !important; /* subtle dark track */
+  border: 1px solid rgba(255,255,255,0.04) !important;
+}
+html[data-theme="dark"] .theme-toggle.light .toggle-thumb {
+  background: linear-gradient(180deg,#ffffff10,#ffffff05) !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6) !important;
+  transform: translateX(0) !important;
+}
+
+/* focus style (accessibility) */
+.theme-toggle:focus-visible .toggle-track { outline: 3px solid rgba(59,130,246,0.18) !important; outline-offset: 4px !important; }
+
+/* small responsive adjustments */
+@media (max-width: 880px) {
+  :root { --toggle-track-w: 48px; --toggle-track-h: 28px; --toggle-padding: 3px; }
+  .theme-toggle { width: var(--toggle-track-w) !important; height: var(--toggle-track-h) !important; }
+}
+
+/* End iOS-style toggle block */

@@ -1,0 +1,120 @@
+/* high visibility, isolated styles */
+.theme-toggle {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  width:56px;
+  height:34px;
+  padding:0;
+  margin:0;
+  z-index:9999; /* ensure on top */
+  -webkit-tap-highlight-color: transparent;
+  border-radius:999px;
+  box-sizing:border-box;
+}
+
+/* track */
+.toggle-track {
+  width:100%;
+  height:100%;
+  border-radius:999px;
+  padding:4px;
+  display:flex;
+  align-items:center;
+  transition: background .22s ease, border-color .22s ease;
+  box-sizing:border-box;
+  border: 1px solid rgba(15,23,36,0.08);
+}
+
+/* thumb */
+.toggle-thumb {
+  width:26px;
+  height:26px;
+  border-radius:50%;
+  background:#fff;
+  box-shadow:0 6px 16px rgba(2,6,23,0.18);
+  transform: translateX(0);
+  transition: transform .22s cubic-bezier(.2,.9,.2,1), background .18s ease, box-shadow .18s ease;
+}
+
+/* light (OFF) */
+.theme-toggle.light .toggle-track {
+  background: linear-gradient(180deg,#ffffff,#f3f4f6);
+  border-color: rgba(15,23,36,0.06);
+}
+.theme-toggle.light .toggle-thumb { transform: translateX(0); background:#fff; }
+
+/* dark (ON) */
+.theme-toggle.dark .toggle-track {
+  background: linear-gradient(90deg,#0b1220,#071021);
+  border-color: rgba(255,255,255,0.06);
+}
+.theme-toggle.dark .toggle-thumb {
+  transform: translateX(22px);
+  background:#0f1724;
+  box-shadow:0 6px 18px rgba(2,6,23,0.36);
+}
+
+/* focus */
+.theme-toggle:focus-visible {
+  outline: 2px solid rgba(59,130,246,0.22);
+  outline-offset: 4px;
+  border-radius:999px;
+}
+
+/* === Make theme toggle visible in dark mode === */
+
+/* darker-track gets a subtle inner border and faint glow so it separates from header */
+.theme-toggle.dark .toggle-track {
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.06);        /* light border to separate from bg */
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.02),
+    0 6px 14px rgba(2,6,23,0.4);                   /* outer shadow for depth */
+}
+
+/* thumb: lighter and slightly glossy so it stands out clearly */
+.theme-toggle.dark .toggle-thumb {
+  background: linear-gradient(180deg,#f5f9ff,#d7e7ff); /* pale thumb for contrast */
+  border: 1px solid rgba(15,23,36,0.12);              /* thin dark rim to keep shape */
+  box-shadow: 0 6px 18px rgba(2,6,23,0.48);
+  transform: translateX(22px);                        /* ensure it's at right position */
+}
+
+/* tiny highlight ring when focused (keyboard users) */
+.theme-toggle.dark:focus-visible {
+  outline: 2px solid rgba(99,102,241,0.18);
+  outline-offset: 4px;
+}
+
+/* optional: small moon icon inside thumb (pure CSS) */
+.theme-toggle.dark .toggle-thumb::after {
+  content: "";
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, rgba(15,23,36,0.9), rgba(15,23,36,0.7) 60%);
+  box-shadow: -3px -2px 0 rgba(255,255,255,0.03);
+  margin: auto;
+  transform: translateY(-0.5px);
+  opacity: 0.95;
+}
+
+/* Ensure off (light) state still looks fine */
+.theme-toggle.light .toggle-track { /* keep whatever you have or slightly brighter */
+  background: linear-gradient(180deg,#ffffff,#f3f4f6);
+  border: 1px solid rgba(15,23,36,0.06);
+}
+.theme-toggle.light .toggle-thumb {
+  background: #fff;
+  box-shadow: 0 6px 16px rgba(2,6,23,0.12);
+  transform: translateX(0);
+}
+
+/* small responsive tweak */
+@media (max-width: 720px) {
+  .theme-toggle { width:50px; height:30px; }
+  .theme-toggle.dark .toggle-thumb { transform: translateX(20px); }
+}
