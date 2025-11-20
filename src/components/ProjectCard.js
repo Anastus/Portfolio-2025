@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 export default function ProjectCard({project}){
   return (
     <motion.a
-      href={project.link}
+      
       className="project-card"
       initial={{ opacity: 0, y: 10 }}
       whileHover={{ y: -6 }}

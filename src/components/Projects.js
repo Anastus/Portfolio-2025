@@ -5,16 +5,14 @@ const projects = [
   {
     title: "Project One",
     desc: "Responsive e-commerce UI built with React, Redux and custom hooks.",
-    tags: ["React", "Redux", "Responsive"],
-    link: "#"
+    tags: ["React", "Redux", "Responsive"], 
   },
   {
     title: "Project Two",
     desc: "Dashboard with charts and lazy-loading components.",
-    tags: ["React", "Charts", "Performance"],
-    link: "#"
+    tags: ["React", "Charts", "Performance"], 
   },
-  // add your real projects here
+  
 ];
 
 export default function Projects(){
