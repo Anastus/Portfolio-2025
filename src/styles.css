@@ -1,0 +1,477 @@
+/* src/styles.css
+   Consolidated, minimal, Apple-like spacing and compact header/hero
+   Replace your current styles.css with this file.
+*/
+
+/* -------------------------
+   Variables & base
+   ------------------------- */
+   :root{
+    --max-width:1100px;
+    --muted:#6b7280;
+    --accent:#0f1724;
+    --gap:20px;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    color-scheme: light;
+  }
+  
+  *{box-sizing:border-box}
+  html,body,#root{height:100%}
+  html { scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background:#ffffff;
+    color:var(--accent);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+  }
+  
+  /* central container */
+  .container{
+    max-width:var(--max-width);
+    margin:0 auto;
+    padding-left:24px;
+    padding-right:24px;
+    padding-top:12px;
+    padding-bottom:12px;
+  }
+  
+  /* -------------------------
+     Header (compact)
+     ------------------------- */
+  .header{
+    position:sticky;
+    top:0;
+    background:#fff;
+    border-bottom:1px solid #f3f4f6;
+    z-index:60;
+    /* keep subtle translucency if desired */
+    backdrop-filter: blur(0.3px);
+  }
+  
+  .header-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:10px 0;            /* compact header height */
+  }
+  
+  /* prominent name/logo */
+  .logo{
+    font-size:1.5rem;        /* bigger and prominent */
+    font-weight:800;
+    letter-spacing:1px;
+    color:var(--accent);
+  }
+  
+  /* nav kept understated */
+  .nav a{
+    margin-left:18px;
+    text-decoration:none;
+    color:var(--muted);
+    font-weight:600;
+    font-size:0.95rem;
+  }
+  .nav a:hover{ color:var(--accent); }
+  
+  /* reserve top spacing for content so sticky header doesn't overlap
+     If you choose to use a fixed pixel header, change padding-top accordingly.
+  */
+  main { padding-top: 6px; }
+  
+  /* -------------------------
+     Hero - centered, tight
+     ------------------------- */
+  .hero-outer {
+    padding-top: 28px;   /* tightened - controls gap under header */
+    padding-bottom: 28px;
+    background: #ffffff;
+    border-top: none;
+  }
+  
+  /* internal hero layout */
+  .hero-inner{
+    display:grid;
+    grid-template-columns: 1fr 320px;
+    gap:28px;
+    align-items:start;
+    padding-top:0;
+  }
+  
+  /* left content */
+  .hero-left{ max-width:64ch; }
+  
+  /* title */
+  .hero-title{
+    margin: 0;                 /* critical: remove top margin pushing it down */
+    font-size:2.2rem;
+    line-height:1.05;
+    font-weight:800;
+    color:var(--accent);
+    margin-bottom:8px;
+  }
+  
+  /* subtitle & description */
+  .hero-sub{
+    margin:0 0 14px 0;
+    color:var(--muted);
+    font-weight:600;
+    letter-spacing:0.1px;
+  }
+  .hero-desc{
+    margin:0 0 18px 0;
+    color:#333;
+    font-size:1rem;
+    max-width:56ch;
+  }
+  
+  /* action area - ensure inline layout */
+  .hero-actions{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:6px;
+  }
+  
+  /* main primary button (See Projects) - subtle */
+  .btn-primary {
+    padding:8px 12px;
+    border-radius:8px;
+    background: #0f1724;
+    color: #fff;
+    text-decoration:none;
+    font-weight:700;
+    font-size:0.95rem;
+    display:inline-block;
+    transition: transform .16s ease, box-shadow .16s ease;
+  }
+  .btn-primary:hover{ transform: translateY(-3px); box-shadow: 0 10px 26px rgba(15,23,36,0.06); }
+  
+  /* ghost button style reused for small resume buttons */
+  .btn-ghost {
+    padding:6px 10px;
+    border-radius:8px;
+    border:1px solid #e8e8e8;
+    background:transparent;
+    color:var(--accent);
+    font-weight:700;
+    font-size:0.85rem;
+    text-decoration:none;
+    display:inline-block;
+  }
+  
+  /* hero-right meta card */
+  .card-meta{
+    border:1px solid #f3f4f6;
+    padding:16px;
+    border-radius:12px;
+    background:#fff;
+    font-size:0.95rem;
+  }
+  .card-meta div{display:flex; justify-content:space-between; padding:6px 0; color:var(--muted)}
+  
+  /* -------------------------
+     Sections (tight & consistent)
+     ------------------------- */
+  /* shared section wrapper - smaller than before */
+  .section{
+    padding-top:20px;
+    padding-bottom:28px;
+    position:relative;
+    background:#ffffff;
+  }
+  
+  /* optional subtle divider for each section */
+  .section-separated {
+    border-top:1px solid #f6f7f8;
+  }
+  
+  /* section title */
+  .section-title{
+    font-size:1.05rem;
+    margin:0 0 12px 0;
+    font-weight:700;
+    color:#0b1220;
+  }
+  
+  /* a small helper for content spacing inside a section */
+  .section .section-content { margin-top:8px; }
+  
+  /* Projects grid */
+  .projects-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap:18px;
+  }
+  
+  /* Project card */
+  .project-card{
+    display:flex;
+    flex-direction:column;
+    text-decoration:none;
+    border-radius:12px;
+    border:1px solid #f3f4f6;
+    padding:16px;
+    background:#fff;
+    transition: box-shadow .22s ease, transform .16s ease;
+  }
+  .project-card:hover{ transform: translateY(-6px); box-shadow: 0 18px 40px rgba(16,24,40,0.06); }
+  .project-body h3{ margin:0 0 6px; font-size:1.05rem; }
+  .project-body p{ margin:0; color:var(--muted); font-size:0.95rem; }
+  .project-tags{ margin-top:12px; display:flex; gap:8px; flex-wrap:wrap; }
+  .tag{ font-size:0.8rem; padding:6px 8px; border-radius:999px; border:1px solid #f3f4f6; color:var(--muted); }
+  
+  /* Skills */
+  .skills-grid{ display:flex; gap:10px; flex-wrap:wrap; }
+  .skill-item{ padding:8px 12px; border-radius:10px; border:1px solid #f3f4f6; font-weight:600; font-size:0.9rem; color:var(--muted); }
+  
+  /* Experience tweaks */
+  .exp ul { margin:8px 0 0 18px; }
+  
+  /* Footer */
+  .footer{ border-top:1px solid #f3f4f6; padding:20px 0; text-align:center; color:var(--muted); font-size:0.95rem; }
+  
+  /* -------------------------
+     Resume buttons (compact) - inline and identical
+     ------------------------- */
+  .resume-buttons {
+    display:inline-flex;
+    gap:8px;
+    align-items:center;
+  }
+  
+  .resume-btn {
+    padding:4px 8px;
+    border-radius:6px;
+    font-size:0.78rem;
+    font-weight:700;
+    text-decoration:none;
+    border:1px solid #d1d5db;
+    background:#ffffff;
+    color:var(--accent);
+    transition: all .14s ease;
+    line-height:1;
+  }
+  .resume-btn:hover {
+    background:#f8f9fb;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+  }
+  
+  /* ensure the inline <p> row containing RESUME and buttons stays horizontal */
+  .hero-actions p, .hero-actions .row-inline {
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:0;            /* remove default p margins */
+  }
+  
+  /* -------------------------
+     Accessibility & reduced motion
+     ------------------------- */
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0ms !important; transition-duration: 0ms !important; }
+  }
+  
+  /* -------------------------
+     Responsive adjustments
+     ------------------------- */
+  @media (max-width: 980px) {
+    .hero-inner { grid-template-columns: 1fr; gap:20px; }
+    .card-meta { order:2; }
+    .hero-left { order:1; }
+    .logo { font-size:1.2rem; }
+    .hero-title { font-size:1.6rem; }
+    .container { padding-left:18px; padding-right:18px; }
+    .resume-btn { padding:4px 6px; font-size:0.75rem; }
+  }
+  
+  @media (max-width: 520px) {
+  
+    .logo { font-size:1.05rem; }
+    .hero-title { font-size:1.4rem; }
+    .hero-desc { font-size:0.95rem; }
+    .nav { display:none; } /* compact mobile: hide nav or replace with burger */
+  }
+
+  /* ------------------------------------------------------
+   CLEAN, BALANCED SPACING SYSTEM (RECOMMENDED)
+   ------------------------------------------------------ */
+
+/* Main container spacing */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/* STAR OF THE FIX: balanced spacing for all sections */
+.section {
+  padding-top: 48px;      /* equal, comfortable spacing */
+  padding-bottom: 48px;   
+  background: #ffffff;
+  position: relative;
+}
+
+/* thin divider between every section */
+.section-separated {
+  border-top: 1px solid #f3f4f6;
+}
+
+/* ------------------------------------------------------
+   HERO SPACING — not cramped, not too far
+   ------------------------------------------------------ */
+.hero-outer {
+  padding-top: 64px;      /* good spacing under the header */
+  padding-bottom: 48px;
+}
+
+/* hero inner container */
+.hero-inner {
+  padding-top: 0;
+}
+
+/* remove accidental margins causing push-down */
+.hero-title {
+  margin-top: 0;
+}
+
+/* ------------------------------------------------------
+   HEADER spacing — consistent & compact
+   ------------------------------------------------------ */
+.header-inner {
+  padding: 16px 0;       /* comfortable height */
+}
+
+/* ------------------------------------------------------
+   Tiny general margin fixes
+   ------------------------------------------------------ */
+.section-title {
+  margin: 0 0 20px 0;
+}
+
+.hero-actions {
+  margin-top: 16px;
+}
+
+.hero-desc {
+  margin-bottom: 16px;
+}
+
+/* ------------------------------------------
+   SMALL | CENTERED | SINGLE ROW SKILL CARDS
+   ------------------------------------------ */
+/* Fix clipped hover: allow overflow + layer above everything */
+.section,
+.skills-grid {
+  overflow: visible;   /* ensure shadow and lift are visible */
+}
+
+/* skill bar: single row, scrollable if needed */
+.skills-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.skills-grid::-webkit-scrollbar { display:none; }
+
+/* skill chip */
+.skill-item {
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--accent);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  white-space: nowrap;
+  height: 34px;
+
+  /* important for hover stacking & smooth animation */
+  position: relative;
+  z-index: 0;
+  will-change: transform, box-shadow;
+  transition: transform 0.15s ease, box-shadow 0.20s ease;
+}
+
+/* Hover: small lift, elevated z-index so it is not clipped */
+.skill-item:hover {
+  transform: translateY(-4px);           /* moderate lift */
+  box-shadow: 0 16px 28px rgba(0,0,0,0.08);
+  z-index: 30;                           /* put above header/other elements */
+}
+
+/* If your header overlaps on hover (sticky header), reduce lift further */
+@media (max-width: 980px) {
+  .skill-item:hover { transform: translateY(-3px); }
+}
+
+/* ===== Fix clipping of hovered skill chips =====
+   Paste this at the END of src/styles.css
+   It forces overflow visible on likely parents, removes accidental transforms,
+   lowers header stacking, and ensures hovered chip is above header.
+   ===== */
+
+ /* 1) Allow overflow on common container elements that might clip children */
+ #root,
+ body,
+ main,
+ .container,
+ .hero-outer,
+ .hero-inner,
+ .section,
+ .section-separated,
+ .skills-grid {
+   overflow: visible !important;
+ }
+ 
+ /* 2) Remove accidental transforms on those ancestors (transforms create stacking contexts) */
+ #root,
+ body,
+ main,
+ .container,
+ .hero-outer,
+ .hero-inner,
+ .section,
+ .section-separated {
+   transform: none !important;
+ }
+ 
+ /* 3) Ensure sticky header is slightly lower z-index than hovered chips */
+ .header {
+   z-index: 50 !important;   /* keep header on top normally, but not above hovered chips */
+ }
+ 
+ /* 4) Ensure skill chips can float above everything when hovered */
+ .skill-item {
+   position: relative;
+   z-index: 1;
+   will-change: transform, box-shadow;
+ }
+ 
+ /* Raise on hover so chip sits above header and siblings */
+ .skill-item:hover,
+ .skill-item:focus {
+   z-index: 9999 !important;    /* very high to ensure visibility */
+   transform: translateY(-6px) !important;  /* subtle lift */
+   box-shadow: 0 20px 40px rgba(0,0,0,0.12) !important;
+ }
+ 
+ /* 5) Slightly reduce header shadow so lifted chips read well */
+ .header {
+   box-shadow: none !important;
+ }
+ 
+ /* 6) Safety for mobile: smaller lift to avoid overlap into header */
+ @media (max-width: 980px) {
+   .skill-item:hover { transform: translateY(-3px) !important; box-shadow: 0 12px 24px rgba(0,0,0,0.10) !important; }
+ }
