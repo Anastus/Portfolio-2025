@@ -24,6 +24,11 @@ export default function Hero(){
           </div> */}
         </div>
 
+        <div className="hero-photo-wrap">
+  <div className="photo-frame">
+    <img src="/profile.jpg" alt="Profile" className="hero-photo" />
+  </div>
+</div>
         
       </div>
     </motion.section>
