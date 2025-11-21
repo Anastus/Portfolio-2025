@@ -1119,3 +1119,307 @@ html[data-theme="dark"] h2, html[data-theme="dark"] h3, html[data-theme="dark"] 
       0 12px 32px rgba(0,0,0,0.25),
       inset 0 1px 2px rgba(255,255,255,0.5);
   } 
+/* ===== Responsive tuning for Header & Skills (mobile / tablet / iPad) ===== */
+
+/* Header: make nav touch-friendly and collapse gracefully */
+@media (max-width: 1100px) {
+  /* reduce nav gap and increase tap area */
+  .header .nav { gap: 18px; }
+  .header .nav a { padding: 10px 8px; font-size: 0.95rem; }
+  /* ensure resume-controls and header-controls remain reachable */
+  .header .header-controls { right: 12px; }
+}
+
+@media (max-width: 880px) {
+  /* On tablets and narrow laptops: stack header elements in a single row, show larger tappable nav */
+  .header-inner { padding: 12px 8px !important; }
+  .logo { margin-right: 12px; }
+  .header .nav { position: static !important; margin-left: auto; gap: 14px; }
+  .header .nav a { padding: 12px 10px; font-size: 0.98rem; }
+  .header .header-controls { position: static !important; margin-left: 12px; right: auto; }
+}
+
+@media (max-width: 520px) {
+  /* Mobile: collapse nav to a single row and hide long text; increase spacing for tap */
+  .header-inner { padding: 12px 12px !important; min-height: 56px; }
+  .logo { font-size: 1.05rem !important; }
+  .header .nav { display: none !important; } /* hide nav on small screens (use a burger later if desired) */
+  .header .header-controls { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); }
+}
+
+/* Skills: responsive wrapping and center alignment */
+/* On wide screens skills are inline; on smaller screens we switch to wrapped rows and center them */
+.skills-grid {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center; /* center skills on narrow widths */
+}
+
+/* ensure skill chips stay readable and centered on mobiles */
+@media (max-width: 980px) {
+  .skills-grid { gap: 10px; }
+  .skill-item {
+    padding: 8px 10px;
+    font-size: 0.82rem;
+    height: auto;
+    min-height: 34px;
+  }
+}
+
+@media (max-width: 520px) {
+  .skills-grid { gap: 8px; }
+  .skill-item {
+    padding: 6px 10px;
+    font-size: 0.78rem;
+    min-width: 92px; /* keep chips reasonably sized */
+  }
+}
+
+/* Reduce hover lift on touch devices to avoid header overlap */
+@media (hover: none) {
+  .skill-item:hover { transform: none !important; box-shadow: none !important; }
+}
+
+/* Small accessibility tweak: ensure focus outlines for keyboard users */
+.skill-item:focus { outline: 3px solid rgba(59,130,246,0.18); outline-offset: 4px; }
+
+/* ===== End responsive tuning ===== */
+
+/* ===== Mobile hamburger + resume dropdown (mobile-only) ===== */
+.mobile-resume-toggle {
+  display: none; /* desktop hidden, shown on small screens via media query */
+  background: transparent;
+  border: none;
+  color: inherit;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.mobile-resume-toggle svg { display: block; }
+
+.mobile-resume-menu {
+  display: none;
+  position: absolute;
+  right: 16px;
+  top: calc(100% + 8px);
+  background: var(--surface, #ffffff);
+  border: 1px solid var(--card-border, #e6e8eb);
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 12px 30px rgba(2,6,23,0.12);
+  min-width: 160px;
+  z-index: 10050;
+}
+
+.mobile-resume-menu.visible {
+  /* show as vertical stacked column when visible on mobile */
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  flex-direction: column !important; /* ensure vertical list */
+  gap: 8px !important;
+
+  /* make the menu background transparent when opened (click) */
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 6px 8px !important;
+
+  /* keep it anchored above content */
+  position: absolute !important;
+  right: 12px !important;
+  top: calc(100% + 8px) !important;
+  z-index: 10050 !important;
+}
+
+/* also ensure resume buttons stack full width */
+.mobile-resume-menu .resume-btn {
+  display: block !important;
+  width: 100% !important;
+  text-align: left !important; /* left-align text for a vertical list feel */
+  padding: 10px 12px !important;
+  border-radius: 8px !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* if you still want a subtle divider between items in transparent menu, use this */
+.mobile-resume-menu .resume-btn + .resume-btn {
+  border-top: 1px solid rgba(255,255,255,0.06) !important;
+}
+
+/* keep the menu hidden on desktop even if .visible accidentally applied */
+@media (min-width: 521px) {
+  .mobile-resume-menu.visible { display: none !important; visibility: hidden !important; opacity: 0 !important; }
+}
+
+/* stack resume buttons full width in the menu */
+.mobile-resume-menu .resume-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 8px;
+}
+.mobile-resume-menu .resume-btn:last-child { margin-bottom: 0; }
+
+/* Only enable mobile hamburger/menu on small screens */
+@media (max-width: 520px) {
+  .mobile-resume-toggle { display: inline-flex; align-items: center; justify-content: center; }
+  .header .nav { display: none !important; } /* hide regular nav on mobile (keeps header uncluttered) */
+  .header .header-controls { position: relative; } /* keep menu positioned relative to header-controls */
+  .resume-controls { display: none !important; } /* hide inline header resume controls on mobile to avoid duplication */
+}
+
+/* ensure menu adapts to dark theme */
+html[data-theme="dark"] .mobile-resume-menu {
+  background: var(--surface, #0f1724) !important;
+  border-color: rgba(255,255,255,0.06) !important;
+  color: var(--text, #e6eef8) !important;
+}
+
+.mobile-resume-toggle:focus-visible { outline: 3px solid rgba(59,130,246,0.18); outline-offset: 4px; }
+/* ===== MOBILE RESUME VISIBILITY FIX ===== */
+/* Force the mobile menu and toggle to be hidden on desktop, and only allow the
+   menu to display on small screens when the hamburger has been clicked (i.e. .visible).
+   This override uses !important to ensure it wins over earlier rules. */
+
+/* Default: hide both the hamburger and the mobile menu on larger screens */
+.mobile-resume-toggle,
+.mobile-resume-menu {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* On small screens show the hamburger. The menu remains hidden until .visible is set. */
+@media (max-width: 520px) {
+  .mobile-resume-toggle {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* When .visible is present, show the menu (stacked column) */
+  .mobile-resume-menu.visible {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Extra safety: if some script toggles .visible on desktop, ensure the menu is still hidden
+   unless the viewport width is <=520px */
+@media (min-width: 521px) {
+  .mobile-resume-menu.visible {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+  }
+}
+
+/* End MOBILE RESUME VISIBILITY FIX */
+
+/* ===== Prevent wrapping for mobile resume buttons ===== */
+.mobile-resume-menu .resume-btn {
+  white-space: nowrap !important;       /* keep text on a single line */
+  overflow: hidden !important;         /* avoid expanding the container */
+  text-overflow: ellipsis !important;  /* show ellipsis if it must truncate */
+  display: inline-block !important;    /* preserve single-line behavior */
+  box-sizing: border-box !important;
+}
+
+/* If you prefer the button to expand instead of truncating, increase min-width on menu */
+.mobile-resume-menu { min-width: 220px !important; }
+/* ===== Fix: ensure mobile resume buttons show full text (no clipping) ===== */
+
+/* Allow the mobile menu to size to its content but never overflow the viewport */
+.mobile-resume-menu {
+  min-width: auto !important;               /* let width be content-driven */
+  width: max-content !important;            /* grow to fit button text */
+  max-width: calc(100vw - 32px) !important; /* never exceed viewport (leave small padding) */
+  box-sizing: border-box !important;
+  padding: 6px 8px !important;
+}
+
+/* Keep each button on a single line and allow the menu to expand rather than truncate */
+.mobile-resume-menu .resume-btn {
+  white-space: nowrap !important;       /* single line */
+  overflow: visible !important;         /* allow full text to be visible */
+  text-overflow: clip !important;       /* do not show ellipsis */
+  display: inline-flex !important;      /* keep a predictable layout */
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 8px 12px !important;
+  min-width: 0 !important;
+}
+
+/* If a button would still exceed viewport, allow it to wrap as a fallback on very narrow devices */
+@media (max-width: 360px) {
+  .mobile-resume-menu { width: calc(100vw - 24px) !important; }
+  .mobile-resume-menu .resume-btn { white-space: normal !important; }
+}
+
+/* End fix */
+/* ===== MOBILE RESUME: fixed sizing & alignment ===== */
+/* Make the mobile dropdown align within page margins and keep labels on a single line */
+.mobile-resume-menu {
+  /* base placement (anchor to right) */
+  position: absolute !important;
+  right: 12px !important;
+  top: calc(100% + 8px) !important;
+
+  /* visual */
+  background: rgba(0,0,0,0.0) !important; /* transparent overlay */
+  border: none !important;
+  box-shadow: 0 12px 30px rgba(2,6,23,0.06) !important;
+  padding: 6px 8px !important;
+  border-radius: 10px !important;
+  z-index: 10050 !important;
+
+  /* Size: prefer a comfortable fixed max width but never overflow viewport */
+  width: min(360px, calc(100vw - 40px)) !important; /* will fit on most phones */
+  max-width: calc(100vw - 40px) !important;
+  box-sizing: border-box !important;
+
+  /* vertical stack */
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+}
+
+/* visible state (mobile only) */
+.mobile-resume-menu.visible {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Ensure each button fills the dropdown width and the text is visible on one line */
+.mobile-resume-menu .resume-btn {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  padding: 10px 14px !important;
+  white-space: nowrap !important;        /* avoid wrapping */
+  overflow: hidden !important;          /* keep inside box */
+  text-overflow: ellipsis !important;   /* show ellipsis if still too long */
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Small screens: if the viewport is extremely narrow allow the menu to use most of the width */
+@media (max-width: 360px) {
+  .mobile-resume-menu { width: calc(100vw - 24px) !important; }
+  .mobile-resume-menu .resume-btn { white-space: normal !important; }
+}
+
+/* Safety: keep hidden on desktop */
+@media (min-width: 521px) {
+  .mobile-resume-menu { display: none !important; visibility: hidden !important; opacity: 0 !important; }
+}
+
+/* End MOBILE RESUME fix */
