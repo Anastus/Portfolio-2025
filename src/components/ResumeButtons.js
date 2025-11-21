@@ -12,7 +12,7 @@ export default function ResumeButtons() {
         rel="noopener noreferrer"
         className="resume-btn"
       >
-        View
+        View Resume
       </a>
 
       <a
@@ -20,7 +20,7 @@ export default function ResumeButtons() {
         download="Anastus John A Resume 2025.pdf"
         className="resume-btn"
       >
-        Download
+        Download Resume
       </a>
     </span>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import ResumeButtons from "./ResumeButtons";
+// import ResumeButtons from "./ResumeButtons";
 
 export default function Hero(){
   return (
@@ -18,10 +18,10 @@ export default function Hero(){
             <div className="hero-right">
             <div><strong>LOCATION: </strong><span>Chennai, India</span></div>
             </div>
-          <div className="hero-actions">
+          {/* <div className="hero-actions">
                       <p> <strong>RESUME :</strong><ResumeButtons /></p> 
                       
-          </div>
+          </div> */}
         </div>
 
         

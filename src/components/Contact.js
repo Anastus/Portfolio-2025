@@ -53,7 +53,7 @@ export default function Contact() {
             >
               <div className="card-emoji">📫</div>
               <div className="card-body">
-                <div className="card-title">Email</div>
+              <div className="card-title" style={{ fontWeight: "800" }}>Email</div>
                 <div className="card-desc">johnanastus25@gmail.com</div>
                 <div className="card-actions">
                   <button className="resume-btn mini" onClick={copyEmail} aria-label="Copy email">Copy</button>
@@ -68,7 +68,7 @@ export default function Contact() {
             >
               <div className="card-emoji">📞</div>
               <div className="card-body">
-                <div className="card-title">Phone</div>
+              <div className="card-title" style={{ fontWeight: "800" }}>Phone</div>
                 <div className="card-desc">+91 6384023485</div>
                 <div className="card-actions">
                   <a className="resume-btn mini" href="tel:+916384023485" >Call</a>
@@ -83,7 +83,7 @@ export default function Contact() {
             >
               <div className="card-emoji">🔗</div>
               <div className="card-body">
-                <div className="card-title">Social</div>
+              <div className="card-title" style={{ fontWeight: "800" }}>Social</div>
                 <div className="card-desc">Connect on LinkedIn</div>
                 <div className="card-actions">
                   <a className="resume-btn mini" href="http://www.linkedin.com/in/anastusjohn25" target="_blank" rel="noreferrer">LinkedIn</a>
@@ -98,7 +98,7 @@ export default function Contact() {
 
             <div className="card-emoji">🛠️</div> 
             <div className="card-body">
-                <div className="card-title">Workspace</div>
+            <div className="card-title" style={{ fontWeight: "800" }}>Workspace</div>
                 <div className="card-desc">View my GitHub</div>
                 <div className="card-actions">
                 <a className="resume-btn mini" href="https://github.com/Anastus" target="_blank" rel="noreferrer">GitHub</a>

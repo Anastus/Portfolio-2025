@@ -1,6 +1,7 @@
 // src/components/Header.js
 import React, { useEffect, useState } from "react";
-import { Link } from "react-scroll";
+// import { Link } from "react-scroll";
+import ResumeButtons from "./ResumeButtons";
 import ThemeToggle from "./ThemeToggle"; // in same folder
 
 export default function Header() {
@@ -20,9 +21,12 @@ export default function Header() {
 
         {/* center nav — we center with CSS below */}
         <nav className="nav" aria-label="Primary">
-          <Link to="home" smooth offset={-70} duration={300}>HOME</Link>
+          {/* <Link to="home" smooth offset={-70} duration={300}>HOME</Link>
           <Link to="projects" smooth offset={-70} duration={300}>PROJECTS</Link>
-          <Link to="contact" smooth offset={-70} duration={300}>CONTACT</Link>
+          <Link to="contact" smooth offset={-70} duration={300}>CONTACT</Link> */}
+          <div className="resume-controls" role="group" aria-label="Resume actions">
+            <ResumeButtons />
+          </div>
         </nav>
 
         {/* right side controls */}

@@ -325,7 +325,7 @@
 
 /* thin divider between every section */
 .section-separated {
-  border-top: 1px solid #f3f4f6;
+  border-top: 0px solid #f3f4f6;
 }
 
 /* ------------------------------------------------------
@@ -562,6 +562,7 @@
   width: 100%;
   align-items: stretch;   /* make each card equal height when content differs */
 }
+
 
 /* each card: occupy full grid cell, keep horizontal layout for icon + body
    but prevent cards from stretching beyond their cell */
@@ -1026,3 +1027,34 @@ html[data-theme="dark"] h2, html[data-theme="dark"] h3, html[data-theme="dark"] 
 }
 
 /* end of dark-mode headings override */
+
+/* resume controls (header) */
+.resume-controls {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* style resume buttons inside header (keeps them compact and elegant) */
+.resume-controls .resume-btn {
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  border: 1px solid rgba(255,255,255,0.12); /* use light rim on dark header */
+  background: transparent;
+  color: inherit;
+  transition: transform .14s ease, box-shadow .14s ease, background .14s ease;
+}
+
+/* primary-looking download button */
+.resume-controls .resume-btn.download {
+  background: rgba(255,255,255,0.08); /* subtle filled look */
+  color: #fff;
+}
+
+/* hover affordance */
+.resume-controls .resume-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(2,6,23,0.18);
+}
