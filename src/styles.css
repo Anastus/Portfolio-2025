@@ -542,109 +542,56 @@
   transform: translateX(-50%) translateY(-4px);
 }
 
-/* ------------------ Contact: modern animated styles ------------------ */
+/* ------------------ Contact: modern animated styles (responsive evenly spaced cards) ------------------ */
 
 .contact-grid {
+  /* single column grid so the cards area spans the full container width
+     (previous two-column layout left large right margin when the form was absent). */
   display: grid;
-  grid-template-columns: 1fr 420px;
+  grid-template-columns: 1fr; /* left column takes full width so cards can stretch */
   gap: 28px;
   align-items: start;
 }
 
-/* cards column */
+/* cards column: use an internal responsive grid so cards are spaced equally
+   across the available container area and adapt to screen size */
 .contact-cards {
-  display: flex;
-  flex-direction: row;      /* horizontal */
-  gap: 20px;                 /* spacing between cards */
-  flex-wrap: nowrap;         /* NO wrapping */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 28px;              /* spacing between cards */
   width: 100%;
-  justify-content: space-between;
+  align-items: stretch;   /* make each card equal height when content differs */
 }
 
-
-/* each card */
+/* each card: occupy full grid cell, keep horizontal layout for icon + body
+   but prevent cards from stretching beyond their cell */
 .contact-card {
-  flex: 1;                     /* every card takes equal width */
-  min-width: 240px;            /* prevents squeezing too small */
   display: flex;
   gap: 12px;
   align-items: center;
+  width: 100%;
   padding: 16px;
   border-radius: 12px;
-  background: #fff;
-  border: 1px solid #f2f3f5;
+  background: var(--surface, #fff);
+  border: 1px solid var(--card-border, #f2f3f5);
   transition: transform .18s ease, box-shadow .18s ease;
 }
 
-/* emoji sticker */
-.card-emoji {
-  font-size: 28px;
-  width: 56px;
-  height: 56px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius: 12px;
-  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
-  border: 1px solid #f3f4f6;
-  box-shadow: 0 6px 12px rgba(16,24,40,0.04);
+/* small tweak so the emoji sticker and body keep the same visual balance */
+.card-emoji { flex: 0 0 56px; }
+.card-body { flex: 1 1 auto; }
+
+/* Responsive overrides: reduce columns on smaller viewports */
+@media (max-width: 1100px) {
+  .contact-cards { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 22px; }
 }
-
-/* card body */
-.card-body { flex:1 }
-.card-title { font-weight:800; font-size:0.98rem; margin-bottom:4px; }
-.card-desc { color:var(--muted); font-size:0.92rem; margin-bottom:10px; }
-.card-actions { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
-.small-note { margin-top:8px; color:var(--muted); font-size:0.8rem; }
-
-/* form column */
-.contact-form-wrap { align-self:start; }
-.contact-form {
-  background:#fff;
-  border:1px solid #f3f4f6;
-  padding:14px;
-  border-radius:12px;
-}
-.form-row { display:flex; gap:8px; margin-bottom:10px; }
-.input, .textarea {
-  width:100%;
-  padding:10px 12px;
-  border-radius:8px;
-  border:1px solid #e6e8eb;
-  background:#fff;
-  font-size:0.95rem;
-  outline:none;
-}
-.textarea { min-height:110px; resize:vertical; }
-
-.form-actions { display:flex; gap:10px; margin-top:10px; align-items:center; }
-.helper-line { margin-top:12px; color:var(--muted); font-size:0.9rem; }
-
-/* buttons (mini + primary) */
-.resume-btn.mini { padding:6px 8px; border-radius:8px; border:1px solid #e8e8e8; background:transparent; text-decoration:none; color:var(--accent); font-weight:700; font-size:0.85rem; }
-.btn-primary { padding:10px 14px; border-radius:10px; background:#0f1724; color:#fff; border:none; cursor:pointer; font-weight:700; }
-.btn-ghost { padding:8px 12px; border-radius:10px; border:1px solid #e8e8e8; background:transparent; cursor:pointer; }
-
-/* toast */
-.toast {
-  position: fixed;
-  right: 20px;
-  bottom: 24px;
-  background: #0f1724;
-  color:#fff;
-  padding:10px 14px;
-  border-radius:8px;
-  box-shadow: 0 14px 40px rgba(15,23,36,0.12);
-  font-weight:700;
-  z-index:99999;
-}
-
-/* responsive */
-@media (max-width:980px) {
+@media (max-width: 720px) {
   .contact-grid { grid-template-columns: 1fr; }
-  .contact-form-wrap { order: 2; }
-  .contact-cards { order: 1; }
+  .contact-cards { grid-template-columns: 1fr; gap: 18px; }
+  .contact-card { padding: 14px; }
 }
+
+/* End contact cards replacement */
 
 /* =========================
   Header: black -> transparent on scroll
