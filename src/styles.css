@@ -1060,3 +1060,22 @@ html[data-theme="dark"] .theme-toggle.light .toggle-thumb {
 }
 
 /* End iOS-style toggle block */
+/* ===== Ensure section & heading text is white in dark mode ===== */
+html[data-theme="dark"] .section-title,
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .project-body h3,
+html[data-theme="dark"] .contact-card .card-title,
+html[data-theme="dark"] .card-title,
+html[data-theme="dark"] .nav a {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+/* also ensure any small heading variants use white */
+html[data-theme="dark"] h2, html[data-theme="dark"] h3, html[data-theme="dark"] h1 {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* end of dark-mode headings override */
