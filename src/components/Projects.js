@@ -4,13 +4,15 @@ import ProjectCard from "./ProjectCard";
 const projects = [
   {
     title: "Project One",
-    desc: "Responsive e-commerce UI built with React, Redux and custom hooks.",
-    tags: ["React", "Redux", "Responsive"], 
+    desc: "This is my Photography Portfolio",
+    href: "https://photography-portfolio-pi-dun.vercel.app",
+    tags: ["React", "Redux", "Responsive Design", "Javascript", "HTML", "CSS", "NodeJs"], 
   },
   {
     title: "Project Two",
-    desc: "Dashboard with charts and lazy-loading components.",
-    tags: ["React", "Charts", "Performance"], 
+    desc: "This is a Habit Tracker",
+    href:"https://habit-tracker-nine-kohl.vercel.app/",
+    tags: ["React", "Redux", "Responsive Design", "Javascript", "HTML", "CSS", "NodeJs"], 
   },
   
 ];
